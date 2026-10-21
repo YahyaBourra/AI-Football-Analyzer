@@ -1,0 +1,37 @@
+# PyTorch with CUDA 12.1 (NVIDIA RTX 4060). The extra index provides the +cu121 wheels;
+# without it pip installs the CPU-only build from PyPI.
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+
+# Core Computer Vision and ML (YOLO11 is provided by ultralytics >= 8.3)
+ultralytics>=8.3.0
+opencv-python>=4.8.0
+
+# Object Tracking: sv.ByteTrack is removed in supervision 0.31
+supervision>=0.23.0,<0.31
+
+# Data Processing and Math
+numpy>=1.24.0
+scipy>=1.11.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0
+pillow>=10.0.0
+
+# Utilities
+tqdm>=4.65.0
+pyyaml>=6.0
+
+# Optional: For advanced tactical analysis
+scikit-learn>=1.3.0
+scikit-image>=0.21.0
+
+# Phase 8 offline augmentation (auto_augment_train.py)
+albumentations>=1.4,<2
+
+# Web dashboard (app.py): python -m streamlit run app.py
+streamlit>=1.30.0
+plotly>=5.18.0
+streamlit-image-coordinates>=0.3.0

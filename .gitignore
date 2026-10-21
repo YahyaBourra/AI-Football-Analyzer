@@ -1,0 +1,60 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Data & Videos
+*.mp4
+*.avi
+*.mkv
+*.webm
+data/output/
+data/augmented_dataset/
+data/hard_negatives*/
+datasets/
+
+# Model weights
+*.pt
+*.pth
+*.engine
+
+# Logs
+*.log
+logs/
+
+# OS & Scratch
+.DS_Store
+Thumbs.db
+_*
+
+# Ultralytics
+runs/
