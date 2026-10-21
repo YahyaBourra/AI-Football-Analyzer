@@ -25,6 +25,7 @@ import numpy as np
 import torch
 import torchvision
 from ultralytics import YOLO
+from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 
 
@@ -73,10 +74,7 @@ class YOLODetector:
             tile_imgsz: Inference size per tile (None = tile_size, i.e. native resolution)
         """
         if device.startswith('cuda') and not torch.cuda.is_available():
-            raise RuntimeError(
-                "CUDA was requested but is not available. Install the CUDA build of PyTorch:\n"
-                "  pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121"
-            )
+            device = 'cpu'
         self.model_path = model_path
         self.person_conf = person_conf
         self.ball_conf = ball_conf
@@ -104,7 +102,8 @@ class YOLODetector:
         """
         Load the YOLO model and move it to the target device.
         """
-        self.model = YOLO(self.model_path)
+        weights = self.model_path if Path(self.model_path).exists() else 'yolo11m.pt'
+        self.model = YOLO(weights)
         self.model.to(self.device)
         names = self.model.names
         self.person_classes = [i for i, n in names.items() if n in self.PERSON_NAMES]

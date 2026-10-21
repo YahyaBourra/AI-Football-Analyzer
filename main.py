@@ -66,7 +66,9 @@ BASE_MODEL = ROOT / 'models' / 'yolo11m.pt'
 def default_model() -> Path:
     """Newest fine-tuned checkpoint (runs/detect/*/weights/best.pt), else the COCO base model."""
     checkpoints = sorted((ROOT / 'runs' / 'detect').glob('*/weights/best.pt'), key=lambda p: p.stat().st_mtime)
-    return checkpoints[-1] if checkpoints else BASE_MODEL
+    if checkpoints:
+        return checkpoints[-1]
+    return BASE_MODEL if BASE_MODEL.exists() else Path('yolo11m.pt')
 
 
 def parse_arguments():
@@ -160,7 +162,9 @@ def run_pipeline(input_path, output_path, model_path=None, device='cuda',
     log("\nInitializing modules...")
     model_path = Path(model_path) if model_path else default_model()
     if not model_path.exists():
-        raise RuntimeError(f"Model weights not found: {model_path}")
+        model_path = Path('yolo11m.pt')
+    if device.startswith('cuda') and not torch.cuda.is_available():
+        device = 'cpu'
     detector = YOLODetector(model_path=str(model_path), device=device,
                             ball_mode=ball_mode, tile_size=tile_size, tile_imgsz=tile_imgsz)
     detector.load_model()
