@@ -5,7 +5,7 @@ torchvision
 
 # Core Computer Vision and ML (YOLO11 is provided by ultralytics >= 8.3)
 ultralytics>=8.3.0
-opencv-python>=4.8.0
+opencv-python-headless>=4.8.0
 
 # Object Tracking: sv.ByteTrack is removed in supervision 0.31
 supervision>=0.23.0,<0.31
