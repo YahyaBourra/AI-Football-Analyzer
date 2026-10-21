@@ -30,6 +30,7 @@ ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT))
 
 from main import run_pipeline, default_model  # noqa: E402
+from src.tactical_map import TacticalMap  # noqa: E402
 
 RUNS_DIR = ROOT / 'data' / 'output' / 'app_runs'
 TEAM_A_RGB, TEAM_B_RGB = '#e63946', '#3a6fd8'
@@ -141,7 +142,6 @@ def draw_clicks(frame: np.ndarray, clicks) -> np.ndarray:
 @st.cache_resource
 def landmark_reference() -> Image.Image:
     """Pitch wireframe with numbered landmark dots for the dropdown list."""
-    from src.tactical_map import TacticalMap
     tm = TacticalMap()
     img = tm.pitch_template.copy()
     for i, (_, (px, py)) in enumerate(LANDMARKS, 1):

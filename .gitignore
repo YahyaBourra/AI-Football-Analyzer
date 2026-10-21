@@ -55,6 +55,7 @@ logs/
 .DS_Store
 Thumbs.db
 _*
+!__init__.py
 
 # Ultralytics
 runs/

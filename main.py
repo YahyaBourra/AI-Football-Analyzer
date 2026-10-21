@@ -49,15 +49,15 @@ import torch
 from tqdm import tqdm
 
 ROOT = Path(__file__).parent
-sys.path.append(str(ROOT / 'src'))
-sys.path.append(str(ROOT / 'utils'))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-from detector import YOLODetector
-from tracker import ObjectTracker, BallTrajectory, KalmanBallTracker, select_ball_candidates
-from team_assigner import TeamAssigner
-from analyzer import TacticalAnalyzer, PlayerKinematics, TeamShape
-from tactical_map import TacticalMap, CameraMotionEstimator
-from visualization import annotate_frame, ColorScheme, TeamHeatmap
+from src.detector import YOLODetector
+from src.tracker import ObjectTracker, BallTrajectory, KalmanBallTracker, select_ball_candidates
+from src.team_assigner import TeamAssigner
+from src.analyzer import TacticalAnalyzer, PlayerKinematics, TeamShape
+from src.tactical_map import TacticalMap, CameraMotionEstimator
+from utils.visualization import annotate_frame, ColorScheme, TeamHeatmap
 
 
 BASE_MODEL = ROOT / 'models' / 'yolo11m.pt'
